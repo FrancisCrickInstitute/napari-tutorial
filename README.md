@@ -19,8 +19,7 @@ vglrun napari
 ```
 After running the previous code you should then see the following blank interface:
 
-![napari blank interface](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface.png?token=GHSAT0AAAAAABXXRCUAELQEDXSILXANPFBYYZN3MJQ)
-
+![napari blank interface](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface.png?token=GHSAT0AAAAAABXXRCUATCFRQ6STP36JA2QYYZN5HAA)
 The following will go into more detail about each element of the interface.
 ![](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface_labels.png?token=GHSAT0AAAAAABXXRCUBCM7ULAN2FAIAWOWSYZN32XQ)
 

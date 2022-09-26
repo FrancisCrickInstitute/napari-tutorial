@@ -19,11 +19,11 @@ vglrun napari
 ```
 After running the previous code you should then see the following blank interface:
 
-![](https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.pnghttps://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.png?raw=true)
+![](https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.png)
 The following will go into more detail about each element of the interface.
-![](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface_labels.png?token=GHSAT0AAAAAABXXRCUBCM7ULAN2FAIAWOWSYZN32XQ)
+![](https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface_labels.png)
 
-1. **New Points Layer** - This will create a new `napari` `Points` and add it to the `Viewer`. The `Points` layer allows 
+1. **New Points Layer** - This will create a new `napari` `Points` and add it to the `Viewer`. The `Points` layer allows
 you to display an `NxD` array of `N` points in `D` coordinates. More info [here](https://napari.org/stable/howtos/layers/points.html).
 2. **New Shape Layer** - This will create a new `napari` `Shapes` and add it to the `Viewer`. The `Shapes`
 layer allows you to display a list of `NxD` arrays, where each array corresponds to one shape. More info [here](https://napari.org/stable/howtos/layers/shapes.html).
@@ -57,7 +57,7 @@ allows you to take an array of integers and display each integer as a different 
 Inorder to launch napari from a python script, within your script you must
 import `napari` , and create the `Viewer`.
 
-In the following code we will launch `napari` and load an image from 
+In the following code we will launch `napari` and load an image from
 `skimage.data`.
 
 ```python3
@@ -76,12 +76,12 @@ napari.run()
 The napari interface will then open with the astronaut image loaded:
 ![napari astronaut interface](https://napari.org/stable/_images/screenshot-add-image.png)
 
-To open an image stored locally in `napari` using a python script you 
+To open an image stored locally in `napari` using a python script you
 must first read in your image, add it to the `Viewer` and then run `napari`.
 
 To read in an image we can use the `skimage.io` `imread` function.
 
-Like before 
+Like before
 
 ```python
 from skimage.io import imread
@@ -94,6 +94,3 @@ viewer = napari.view_image(img)
 
 napari.run()
 ```
-
-
-

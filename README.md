@@ -19,7 +19,7 @@ vglrun napari
 ```
 After running the previous code you should then see the following blank interface:
 
-![napari blank interface](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface.png?token=GHSAT0AAAAAABXXRCUATCFRQ6STP36JA2QYYZN5HAA)
+![](https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.pnghttps://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.png?raw=true)
 The following will go into more detail about each element of the interface.
 ![](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface_labels.png?token=GHSAT0AAAAAABXXRCUBCM7ULAN2FAIAWOWSYZN32XQ)
 
@@ -37,6 +37,21 @@ allows you to take an array of integers and display each integer as a different 
 8. **Transpose order of the last two visible axis** - This will transpose a layer only across its last two visible axis.
 9. **Toggle grid mode** - This will change the layout of the `Viewer` to show all layers in a grid layout.
 10. Reset viewer to original state - This will reset the `Viewer` to show a layer in its original state.
+
+## Napari Layers
+### Image Layer
+
+### Labels Layer
+
+### Points Layer
+
+### Shapes Layer
+
+### Tracks Layer
+
+### Vectors Layer
+
+
 ## Running napari from a Python script
 
 Inorder to launch napari from a python script, within your script you must

@@ -19,9 +19,9 @@ vglrun napari
 ```
 After running the previous code you should then see the following blank interface:
 
-![](https://github.com/FrancisCrickInstitute/napari-tutorial/raw/main/images/blank_napari_interface.png?raw=true)
+![](https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.pnghttps://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.png?raw=true)
 The following will go into more detail about each element of the interface.
-![](https://github.com/FrancisCrickInstitute/napari-tutorial/raw/main/images/blank_napari_interface_labels.png?raw=true)
+![](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface_labels.png?token=GHSAT0AAAAAABXXRCUBCM7ULAN2FAIAWOWSYZN32XQ)
 
 1. **New Points Layer** - This will create a new `napari` `Points` and add it to the `Viewer`. The `Points` layer allows 
 you to display an `NxD` array of `N` points in `D` coordinates. More info [here](https://napari.org/stable/howtos/layers/points.html).
@@ -94,61 +94,6 @@ viewer = napari.view_image(img)
 
 napari.run()
 ```
-
-## Napari and OME-Zarr
-### What is an OME-Zarr file?
-
-### Open local OME-Zarr in napari
-We can use the plugin [napari-ome-zarr](https://www.napari-hub.org/plugins/napari-ome-zarr) either in the command line 
-from on the napari interface to open OME-Zarr files.
-
-To do this from the command line open the terminal.
-
-Activate the napari conda environment using the following command:
-
-``` 
-conda activate napari-env
-```
-
-Now the conda environment is active we can now open napari and the local OME-Zarr file using the following command:
-```
-napari --plugin napari-ome-zarr "~/ome_zarr_data/xyzct_8bit__mitosis.zarr"
-```
-
-### Open remote OME-Zarr in napari
-As well as being able to open OME-Zarr files stored locally we can also open OME-Zarr files that are stored remotely.
-
-
-This can be done once again by using the terminal.
-
-
-We again activate the napari conda environment using the following command:
-
-``` 
-conda activate napari-env
-```
-
-Now the conda environment is activated we like before type in the `napari` and `--plugin-ome-zarr` but this time we can 
-add the link to the remotely stored OME-Zarr file like so:
-
-```
-napari --plugin napari-ome-zarr "https://s3.embl.de/ome-zarr-course/ome_zarr_data/xyzct_8bit__mitosis.zarr"
-```
-
-Using [napari-ome-zarr](https://www.napari-hub.org/plugins/napari-ome-zarr) we are even able to open files as large as 
-8 Terabytes in size as shown in the following:
-
-```
-napari --plugin napari-ome-zarr "https://s3.embl.de/i2k-2020/platy-raw.ome.zarr"
-```
-
-!!! WARNING !!!
-
-If you attempt to zoom in or out of the image you may experience some lag or even napari crashing. The reason for this
-is that when zooming in your increasing the resolution of the image and by extension loading more and more data to your
-RAM. If the amount of data exceed the capacity of your RAM this will cause your napari to automatically shut down.
-
-
 
 
 

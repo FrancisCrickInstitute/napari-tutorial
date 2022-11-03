@@ -1,6 +1,6 @@
 # Topics to cover
 ## Intro
-Prerequisites: None
+Prerequisites: None (or should we make the Fiji course a prerequisite for understanding filters etc??)
 * Installation
 * Basic loading and viewing
 * Using plugins

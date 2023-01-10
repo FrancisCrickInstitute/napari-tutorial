@@ -37,9 +37,9 @@ conda activate napari-env
 conda install napari
 ml VirtualGL
 vglrun napari</code></pre><p>After running the previous code you should then see the following blank interface:</p>
-<p><img src="https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.png" alt>
-The following will go into more detail about each element of the interface.
-<img src="https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface_labels.png" alt></p>
+<p><img src="images/blank_napari_interface.png" alt></p>
+<p>The following will go into more detail about each element of the interface.
+<img src="images/blank_napari_interface_labels.png" alt></p>
 <ol>
 <li><strong>New Points Layer</strong> - This will create a new <code>napari</code> <code>Points</code> and add it to the <code>Viewer</code>. The <code>Points</code> layer allows
 you to display an <code>NxD</code> array of <code>N</code> points in <code>D</code> coordinates. More info <a href="https://napari.org/stable/howtos/layers/points.html">here</a>.</li>
@@ -94,6 +94,52 @@ img = imread(&quot;/path/to/image&quot;)
 viewer = napari.view_image(img)
 
 napari.run()</code></pre>
+<h2 id="napari-and-ome-zarr">Napari and OME-Zarr</h2>
+<p>OME-Zarr is a &quot;Next Generation&quot; file format (NGFF) which stores images as a
+hierarchy with multiple levels of resolutions and optionally associated labels.</p>
+<pre><code>.                             # Root folder, potentially in S3,
+&#x2502;                             # with a flat list of images by image ID.
+&#x2502;
+&#x251C;&#x2500;&#x2500; 123.zarr                  # One image (id=123) converted to Zarr.
+&#x2502;
+&#x2514;&#x2500;&#x2500; 456.zarr                  # Another image (id=456) converted to Zarr.
+    &#x2502;
+    &#x251C;&#x2500;&#x2500; .zgroup               # Each image is a Zarr group, or a folder, of other groups and arrays.
+    &#x251C;&#x2500;&#x2500; .zattrs               # Group level attributes are stored in the .zattrs file and include
+    &#x2502;                         # &quot;multiscales&quot; and &quot;omero&quot; (see below). In addition, the group level attributes
+    &#x2502;                         # must also contain &quot;_ARRAY_DIMENSIONS&quot; if this group directly contains multi-scale arrays.
+    &#x2502;
+    &#x251C;&#x2500;&#x2500; 0                     # Each multiscale level is stored as a separate Zarr array,
+    &#x2502;   ...                   # which is a folder containing chunk files which compose the array.
+    &#x251C;&#x2500;&#x2500; n                     # The name of the array is arbitrary with the ordering defined by
+        &#x2502;                     # by the &quot;multiscales&quot; metadata, but is often a sequence starting at 0.
+        &#x2502;
+        &#x251C;&#x2500;&#x2500; .zarray           # All image arrays must be up to 5-dimensional
+        &#x2502;                     # with the axis of type time before type channel, before spatial axes.
+        &#x2502;
+        &#x2514;&#x2500; t                  # Chunks are stored with the nested directory layout.
+           &#x2514;&#x2500; c               # All but the last chunk element are stored as directories.
+              &#x2514;&#x2500; z            # The terminal chunk is a file. Together the directory and file names
+                 &#x2514;&#x2500; y         # provide the &quot;chunk coordinate&quot; (t, c, z, y, x), where the maximum coordinate
+                    &#x2514;&#x2500; x      # will be dimension_size / chunk_size.</code></pre><h3 id="what-is-an-ome-zarr-file-">What is an OME-Zarr file?</h3>
+<h3 id="open-local-ome-zarr-in-napari">Open local OME-Zarr in napari</h3>
+<p>We can use the plugin <a href="https://www.napari-hub.org/plugins/napari-ome-zarr">napari-ome-zarr</a> either in the command line
+from on the napari interface to open OME-Zarr files.</p>
+<p>To do this from the command line open the terminal.</p>
+<p>Activate the napari conda environment using the following command:</p>
+<pre><code>conda activate napari-env</code></pre><p>Now the conda environment is active we can now open napari and the local OME-Zarr file using the following command:</p>
+<pre><code>napari --plugin napari-ome-zarr &quot;~/ome_zarr_data/xyzct_8bit__mitosis.zarr&quot;</code></pre><h3 id="open-remote-ome-zarr-in-napari">Open remote OME-Zarr in napari</h3>
+<p>As well as being able to open OME-Zarr files stored locally we can also open OME-Zarr files that are stored remotely.</p>
+<p>This can be done once again by using the terminal.</p>
+<p>We again activate the napari conda environment using the following command:</p>
+<pre><code>conda activate napari-env</code></pre><p>Now the conda environment is activated we like before type in the <code>napari</code> and <code>--plugin-ome-zarr</code> but this time we can
+add the link to the remotely stored OME-Zarr file like so:</p>
+<pre><code>napari --plugin napari-ome-zarr &quot;https://s3.embl.de/ome-zarr-course/ome_zarr_data/xyzct_8bit__mitosis.zarr&quot;</code></pre><p>Using <a href="https://www.napari-hub.org/plugins/napari-ome-zarr">napari-ome-zarr</a> we are even able to open files as large as
+8 Terabytes in size as shown in the following:</p>
+<pre><code>napari --plugin napari-ome-zarr &quot;https://s3.embl.de/i2k-2020/platy-raw.ome.zarr&quot;</code></pre><p>!!! WARNING !!!</p>
+<p>If you attempt to zoom in or out of the image you may experience some lag or even napari crashing. The reason for this
+is that when zooming in your increasing the resolution of the image and by extension loading more and more data to your
+RAM. If the amount of data exceed the capacity of your RAM this will cause your napari to automatically shut down.</p>
 </article></div><div style="background-color: #b4b2b2;width: 50px;height:50px;line-height: 50px;text-align: center;position: fixed;bottom: 10px;right: 10px;padding-top:5px;" onclick="document.documentElement.scrollTop = document.body.scrollTop =0;">
   <svg t="1533629773982" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1035" xlink="http://www.w3.org/1999/xlink" width="40" height="40"><defs><style type="text/css">@font-face { font-family: uc-nexus-iconfont; src: url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.woff") format("woff"), url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.ttf") format("truetype"); }
   </style></defs><path d="M536.255427 195.182354c-7.804756-7.804756-17.966187-11.615549-28.311813-11.615549-9.43693 0-18.874883 3.449565-26.496467 10.163477-2.360767 1.452071-4.356214 3.267417-6.352685 5.262864L218.47792 455.611735c-15.607466 15.60542-15.607466 40.834011 0 56.43943 15.607466 15.607466 41.558511 15.607466 57.167001 0l193.46013-192.733583 0 600.526219c0 22.1423 17.787108 39.927361 39.927361 39.927361 22.140253 0 39.927361-17.785062 39.927361-39.927361L548.959773 319.317583 737.15704 508.422522c15.607466 15.607466 40.469714 15.607466 56.078203 0 15.607466-15.607466 15.425318-40.834011-0.182149-56.441477L536.255427 195.182354 536.255427 195.182354z" p-id="1036" fill="#333"/><path d="M101.784174 143.097092l816.674071 0c22.140253 0 39.925315-17.785062 39.925315-39.927361 0-22.140253-17.784038-39.925315-39.925315-39.925315L101.784174 63.244416c-22.140253 0-39.927361 17.785062-39.927361 39.925315C61.856813 125.31203 79.643921 143.097092 101.784174 143.097092L101.784174 143.097092z" p-id="1037" fill="#333"/></svg>

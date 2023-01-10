@@ -19,11 +19,12 @@ vglrun napari
 ```
 After running the previous code you should then see the following blank interface:
 
-![](https://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.pnghttps://github.com/FrancisCrickInstitute/napari-tutorial/blob/main/images/blank_napari_interface.png?raw=true)
-The following will go into more detail about each element of the interface.
-![](https://raw.githubusercontent.com/FrancisCrickInstitute/napari-tutorial/main/images/blank_napari_interface_labels.png?token=GHSAT0AAAAAABXXRCUBCM7ULAN2FAIAWOWSYZN32XQ)
+![](images/blank_napari_interface.png)
 
-1. **New Points Layer** - This will create a new `napari` `Points` and add it to the `Viewer`. The `Points` layer allows 
+The following will go into more detail about each element of the interface.
+![](images/blank_napari_interface_labels.png)
+
+1. **New Points Layer** - This will create a new `napari` `Points` and add it to the `Viewer`. The `Points` layer allows
 you to display an `NxD` array of `N` points in `D` coordinates. More info [here](https://napari.org/stable/howtos/layers/points.html).
 2. **New Shape Layer** - This will create a new `napari` `Shapes` and add it to the `Viewer`. The `Shapes`
 layer allows you to display a list of `NxD` arrays, where each array corresponds to one shape. More info [here](https://napari.org/stable/howtos/layers/shapes.html).
@@ -57,7 +58,7 @@ allows you to take an array of integers and display each integer as a different 
 Inorder to launch napari from a python script, within your script you must
 import `napari` , and create the `Viewer`.
 
-In the following code we will launch `napari` and load an image from 
+In the following code we will launch `napari` and load an image from
 `skimage.data`.
 
 ```python3
@@ -76,12 +77,12 @@ napari.run()
 The napari interface will then open with the astronaut image loaded:
 ![napari astronaut interface](https://napari.org/stable/_images/screenshot-add-image.png)
 
-To open an image stored locally in `napari` using a python script you 
+To open an image stored locally in `napari` using a python script you
 must first read in your image, add it to the `Viewer` and then run `napari`.
 
 To read in an image we can use the `skimage.io` `imread` function.
 
-Like before 
+Like before
 
 ```python
 from skimage.io import imread
@@ -95,7 +96,7 @@ viewer = napari.view_image(img)
 napari.run()
 ```
 ## Napari and OME-Zarr
-OME-Zarr is a "Next Generation" file format (NGFF) which stores images as a 
+OME-Zarr is a "Next Generation" file format (NGFF) which stores images as a
 hierarchy with multiple levels of resolutions and optionally associated labels.
 
 ```
@@ -129,14 +130,14 @@ hierarchy with multiple levels of resolutions and optionally associated labels.
 ### What is an OME-Zarr file?
 
 ### Open local OME-Zarr in napari
-We can use the plugin [napari-ome-zarr](https://www.napari-hub.org/plugins/napari-ome-zarr) either in the command line 
+We can use the plugin [napari-ome-zarr](https://www.napari-hub.org/plugins/napari-ome-zarr) either in the command line
 from on the napari interface to open OME-Zarr files.
 
 To do this from the command line open the terminal.
 
 Activate the napari conda environment using the following command:
 
-``` 
+```
 conda activate napari-env
 ```
 
@@ -154,18 +155,18 @@ This can be done once again by using the terminal.
 
 We again activate the napari conda environment using the following command:
 
-``` 
+```
 conda activate napari-env
 ```
 
-Now the conda environment is activated we like before type in the `napari` and `--plugin-ome-zarr` but this time we can 
+Now the conda environment is activated we like before type in the `napari` and `--plugin-ome-zarr` but this time we can
 add the link to the remotely stored OME-Zarr file like so:
 
 ```
 napari --plugin napari-ome-zarr "https://s3.embl.de/ome-zarr-course/ome_zarr_data/xyzct_8bit__mitosis.zarr"
 ```
 
-Using [napari-ome-zarr](https://www.napari-hub.org/plugins/napari-ome-zarr) we are even able to open files as large as 
+Using [napari-ome-zarr](https://www.napari-hub.org/plugins/napari-ome-zarr) we are even able to open files as large as
 8 Terabytes in size as shown in the following:
 
 ```
@@ -177,5 +178,3 @@ napari --plugin napari-ome-zarr "https://s3.embl.de/i2k-2020/platy-raw.ome.zarr"
 If you attempt to zoom in or out of the image you may experience some lag or even napari crashing. The reason for this
 is that when zooming in your increasing the resolution of the image and by extension loading more and more data to your
 RAM. If the amount of data exceed the capacity of your RAM this will cause your napari to automatically shut down.
-
-
